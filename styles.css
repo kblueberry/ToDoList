@@ -1,0 +1,44 @@
+.header {
+  background-color: dimgrey;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.header_logo {
+  max-width: 5%;
+  width: 10%;
+}
+
+.header_navigation {
+  flex: 1 1 80%;
+}
+
+.header_navigation.horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_navigation.vertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.navigation_link {
+  list-style: none;
+}
+
+.navigation_link a {
+  text-decoration: none;
+  color: white;
+}
+
+.navigation_link a:active {
+  text-decoration: none;
+  color: dodgerblue;
+}
