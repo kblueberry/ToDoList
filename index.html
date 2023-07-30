@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <script src="index.js" type="module"></script>
     <header class="header">
       <img class="header_logo" src="images/logo.svg" alt="todo-logo" />
       <ul class="header_navigation horizontal">
@@ -29,7 +30,35 @@
         </li>
       </ul>
     </header>
-    <main>Gello Hello</main>
+    <main class="main">
+      <h1 class="todo_heading">To-do list</h1>
+      <div class="todo_section">
+        <div class="todo_state_sections">
+          <div class="todo_column column" draggable="true">
+            <h4>To-Do</h4>
+            <div id="column-todo"></div>
+          </div>
+          <div class="in_progress_column column" draggable="true">
+            <h4>In progress</h4>
+            <div id="column-inprogress"></div>
+          </div>
+          <div class="done_column column" draggable="true">
+            <h4>Done</h4>
+            <div id="column-done"></div>
+          </div>
+        </div>
+        <div class="todo_add_new_section">
+          <input
+            id="todo_task_name"
+            class="todo_add_new_input"
+            type="text"
+            value=""
+            required
+          />
+          <button id="add_task_button" class="add_task_button">Add task</button>
+        </div>
+      </div>
+    </main>
     <footer class="header">
       <img class="header_logo" src="images/logo.svg" alt="todo-logo" />
       <ul class="header_navigation vertical">
