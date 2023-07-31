@@ -1,6 +1,7 @@
 import { State } from "./state.js";
 import { Renderer } from "./renderer.js";
 import { TASK_STATUS } from "./constants.js";
+import { Task } from "./task.js";
 
 const state = new State();
 state.restore();
@@ -13,11 +14,7 @@ document.getElementById("add_task_button").addEventListener("click", () => {
     return;
   }
 
-  const task = {
-    id: Date.now(),
-    status: TASK_STATUS.TODO,
-    title,
-  };
+  const task = new Task(title, TASK_STATUS.TODO);
 
   state.add(task);
   state.save();

@@ -26,18 +26,27 @@ class ColumnRenderer {
       "afterbegin",
       `<img class="more_actions_icon" src="/images/more-actions-vertical.svg" alt="more-actions">`
     );
-    this.addMoreActionsTooltip(taskActions);
     textElement.textContent = task.title;
-    newDiv.setAttribute("data-task-id", task.id);
     newDiv.setAttribute("class", "task_row");
     newDiv.appendChild(textElement);
     newDiv.appendChild(taskActions);
     this.root.appendChild(newDiv);
+    this.addMoreActionsTooltip(taskActions, task.status);
   }
 
-  addMoreActionsTooltip(container) {
-    const tooltipContent = `<div class="tooltip_content"><div class="move_to">Move to In Progress</div><div class="move_to">Move to Done</div></div>`;
-    container.insertAdjacentHTML("afterbegin", tooltipContent);
+  addMoreActionsTooltip(container, currentStatus) {
+    const statuses = Object.values(TASK_STATUS).filter(
+      (status) => status !== currentStatus
+    );
+    const tooltipContent = document.createElement("div");
+    tooltipContent.setAttribute("class", "tooltip_content");
+    const action1 = document.createElement("div"),
+      action2 = document.createElement("div");
+    action1.textContent = `Move to ${statuses[0]}`;
+    action2.textContent = `Move to ${statuses[1]}`;
+    tooltipContent.appendChild(action1);
+    tooltipContent.appendChild(action2);
+    container.appendChild(tooltipContent);
   }
 }
 
