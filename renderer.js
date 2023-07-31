@@ -18,10 +18,26 @@ class ColumnRenderer {
   }
 
   renderItem(task) {
-    const newDiv = document.createElement("div");
-    newDiv.textContent = task.title;
+    const newDiv = document.createElement("div"),
+      taskActions = document.createElement("div"),
+      textElement = document.createElement("p");
+    taskActions.setAttribute("class", "more_actions_button");
+    taskActions.insertAdjacentHTML(
+      "afterbegin",
+      `<img class="more_actions_icon" src="/images/more-actions-vertical.svg" alt="more-actions">`
+    );
+    this.addMoreActionsTooltip(taskActions);
+    textElement.textContent = task.title;
     newDiv.setAttribute("data-task-id", task.id);
+    newDiv.setAttribute("class", "task_row");
+    newDiv.appendChild(textElement);
+    newDiv.appendChild(taskActions);
     this.root.appendChild(newDiv);
+  }
+
+  addMoreActionsTooltip(container) {
+    const tooltipContent = `<div class="tooltip_content"><div class="move_to">Move to In Progress</div><div class="move_to">Move to Done</div></div>`;
+    container.insertAdjacentHTML("afterbegin", tooltipContent);
   }
 }
 

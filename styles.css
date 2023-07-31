@@ -98,3 +98,52 @@
   margin: 0 5px;
   cursor: pointer;
 }
+
+.more_actions_button {
+  cursor: pointer;
+  position: relative;
+  /*display: inline-block;*/
+}
+
+.more_actions_button .tooltip_content {
+  visibility: hidden;
+  position: absolute;
+  top: -5px;
+  left: 105%;
+  padding: 0 10px;
+  width: 70px;
+  border: 0.5px solid black;
+  border-radius: 10px;
+  background-color: aliceblue;
+}
+
+.more_actions_button:hover .tooltip_content {
+  visibility: visible;
+}
+
+.move_to {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: block;
+}
+
+.more_actions_icon {
+  width: 18px;
+  height: 18px;
+}
+
+.task_row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*.actions_tooltip {*/
+/*  position: relative;*/
+/*  display: inline-block;*/
+/*  border: 0.5px solid black;*/
+/*}*/
+
+/*.actions_tooltip:hover {*/
+/*  visibility: visible;*/
+/*}*/
