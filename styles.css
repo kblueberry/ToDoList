@@ -1,22 +1,38 @@
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
 .nav_bar {
   background-color: dimgrey;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
+  height: fit-content;
+  width: 100%;
+  right: 0;
+}
+
+.header_nav_bar {
+  position: fixed;
+  top: 0;
 }
 
 .footer_nav_bar {
   flex-direction: row-reverse;
+  height: fit-content;
+  position: fixed;
+  bottom: 0;
 }
 
 .logo {
-  max-width: 5%;
-  width: 10%;
+  width: 40px;
+  margin: 0 15px;
 }
 
 .navigation {
-  flex: 1 1 80%;
   list-style: none;
 }
 
@@ -25,6 +41,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .navigation.vertical {
@@ -34,6 +51,9 @@
   align-items: flex-start;
 }
 
+.navigation_link {
+  margin: 0 15px;
+}
 .navigation_link a {
   text-decoration: none;
   color: white;
@@ -50,6 +70,7 @@
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
+  height: 80vh;
 }
 
 .todo_section {
@@ -65,13 +86,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  max-height: 55vh;
 }
 
 .todo_state_sections .column {
   border: 0.5px solid black;
   padding: 10px 20px;
-  height: 580px;
-  flex: 1 0 50%;
+  flex: 1 0 40%;
+  height: 52vh;
 }
 
 .todo_heading {
@@ -138,12 +160,8 @@
   align-items: center;
 }
 
-/*.actions_tooltip {*/
-/*  position: relative;*/
-/*  display: inline-block;*/
-/*  border: 0.5px solid black;*/
-/*}*/
-
-/*.actions_tooltip:hover {*/
-/*  visibility: visible;*/
-/*}*/
+@media (max-width: 450px) {
+  .todo_state_sections {
+    flex-wrap: wrap;
+  }
+}
