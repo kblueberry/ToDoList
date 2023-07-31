@@ -1,4 +1,4 @@
-import { TASK_STATUS } from "./constants.js";
+import { TASK_STATUS } from "../constants.js";
 
 class ColumnRenderer {
   constructor(rootId, state) {

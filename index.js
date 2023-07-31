@@ -1,7 +1,7 @@
-import { State } from "./state.js";
-import { Renderer } from "./renderer.js";
+import { State } from "./classes/state.js";
+import { Renderer } from "./classes/renderer.js";
 import { TASK_STATUS } from "./constants.js";
-import { Task } from "./task.js";
+import { Task } from "./classes/task.js";
 
 const state = new State();
 state.restore();
