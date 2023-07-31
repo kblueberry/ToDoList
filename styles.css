@@ -132,7 +132,7 @@ body {
   visibility: hidden;
   position: absolute;
   top: -5px;
-  left: 105%;
+  right: 105%;
   padding: 0 10px;
   width: 120px;
   border: 0.5px solid black;
@@ -172,5 +172,10 @@ body {
   .todo_state_sections .column {
     height: 55%;
     overflow-y: auto;
+  }
+
+  .more_actions_button .tooltip_content {
+    top: -29px;
+    right: 102%;
   }
 }
