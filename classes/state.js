@@ -6,6 +6,9 @@ export class State {
     this.stateListeners = [];
   }
 
+  /**
+   * Get todos from storage and trigger columns update
+   */
   restore() {
     const storedValue = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (storedValue) {
@@ -14,15 +17,27 @@ export class State {
     }
   }
 
+  /**
+   * Save todos in local storage
+   */
   save() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.todos));
   }
 
+  /**
+   * Add new task
+   * @param task
+   */
   add(task) {
     this.todos[task.id] = task;
     this.#onStateChange();
   }
 
+  /**
+   * Change status of task
+   * @param id
+   * @param newStatus
+   */
   changeStatus(id, newStatus) {
     const item = this.todos[id];
     if (!item) {
@@ -34,11 +49,11 @@ export class State {
     this.#onStateChange();
   }
 
-  delete(id) {
-    this.todos.delete(id);
-    this.#onStateChange();
-  }
-
+  /**
+   * Get tasks by status
+   * @param status
+   * @returns {*[]}
+   */
   getByStatus(status) {
     const result = [];
     Object.values(this.todos).forEach((item) => {
@@ -50,10 +65,17 @@ export class State {
     return result;
   }
 
+  /**
+   * Trigger columns update on task status changed
+   * @param callback
+   */
   addChangeListener(callback) {
     this.stateListeners.push(callback);
   }
 
+  /**
+   * Update columns after task status changed
+   */
   #onStateChange() {
     this.stateListeners.forEach((callback) => callback());
   }

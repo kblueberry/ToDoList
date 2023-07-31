@@ -12,12 +12,19 @@ class ColumnRenderer {
     this.state = state;
   }
 
+  /**
+   * Clear column content before rendering
+   */
   clear() {
     while (this.root.firstChild) {
       this.root.removeChild(this.root.firstChild);
     }
   }
 
+  /**
+   * Render task as row in the column
+   * @param task
+   */
   renderItem(task) {
     const newDiv = document.createElement("div"),
       taskActions = document.createElement("div"),
@@ -35,6 +42,11 @@ class ColumnRenderer {
     this.renderActionsTooltip(taskActions, task);
   }
 
+  /**
+   * Render More actions button near each task in the column
+   * @param container
+   * @param task
+   */
   renderActionsTooltip(container, task) {
     const statuses = Object.values(TASK_STATUS).filter(
       (status) => status !== task.status
@@ -96,6 +108,9 @@ export class Renderer {
     this.state.addChangeListener(() => this.render());
   }
 
+  /**
+   * Render columns content
+   */
   render() {
     this.columnRenderers.forEach((renderer) => {
       renderer.clear();
