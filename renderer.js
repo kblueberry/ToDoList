@@ -1,7 +1,7 @@
 import { TASK_STATUS } from "./constants.js";
 
 class ColumnRenderer {
-  constructor(rootId) {
+  constructor(rootId, state) {
     const root = document.getElementById(rootId);
     if (!root) {
       throw new Error(
@@ -9,6 +9,7 @@ class ColumnRenderer {
       );
     }
     this.root = root;
+    this.state = state;
   }
 
   clear() {
@@ -31,28 +32,32 @@ class ColumnRenderer {
     newDiv.appendChild(textElement);
     newDiv.appendChild(taskActions);
     this.root.appendChild(newDiv);
-    this.addMoreActionsTooltip(taskActions, task.status);
+    this.renderActionsTooltip(taskActions, task);
   }
 
-  addMoreActionsTooltip(container, currentStatus) {
+  renderActionsTooltip(container, task) {
     const statuses = Object.values(TASK_STATUS).filter(
-      (status) => status !== currentStatus
+      (status) => status !== task.status
     );
     const tooltipContent = document.createElement("div");
     tooltipContent.setAttribute("class", "tooltip_content");
-    const action1 = document.createElement("div"),
-      action2 = document.createElement("div");
-    action1.textContent = `Move to ${statuses[0]}`;
-    action2.textContent = `Move to ${statuses[1]}`;
-    tooltipContent.appendChild(action1);
-    tooltipContent.appendChild(action2);
+
+    statuses.forEach((status) => {
+      const action = document.createElement("div");
+      action.textContent = `Move to ${status}`;
+      action.addEventListener("click", () =>
+        this.state.changeStatus(task.id, status)
+      );
+      tooltipContent.appendChild(action);
+    });
+
     container.appendChild(tooltipContent);
   }
 }
 
 class ToDoColumnRenderer extends ColumnRenderer {
-  constructor() {
-    super("column-todo");
+  constructor(state) {
+    super("column-todo", state);
   }
 
   getStatus() {
@@ -61,8 +66,8 @@ class ToDoColumnRenderer extends ColumnRenderer {
 }
 
 class InProgressColumnRenderer extends ColumnRenderer {
-  constructor() {
-    super("column-inprogress");
+  constructor(state) {
+    super("column-inprogress", state);
   }
 
   getStatus() {
@@ -71,8 +76,8 @@ class InProgressColumnRenderer extends ColumnRenderer {
 }
 
 class DoneColumnRenderer extends ColumnRenderer {
-  constructor() {
-    super("column-done");
+  constructor(state) {
+    super("column-done", state);
   }
 
   getStatus() {
@@ -84,10 +89,11 @@ export class Renderer {
   constructor(state) {
     this.state = state;
     this.columnRenderers = [
-      new ToDoColumnRenderer(),
-      new InProgressColumnRenderer(),
-      new DoneColumnRenderer(),
+      new ToDoColumnRenderer(state),
+      new InProgressColumnRenderer(state),
+      new DoneColumnRenderer(state),
     ];
+    this.state.addChangeListener(() => this.render());
   }
 
   render() {

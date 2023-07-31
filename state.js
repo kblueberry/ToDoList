@@ -3,12 +3,14 @@ const LOCAL_STORAGE_KEY = "kblueberry_todos";
 export class State {
   constructor() {
     this.todos = {};
+    this.stateListeners = [];
   }
 
   restore() {
     const storedValue = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (storedValue) {
       this.todos = JSON.parse(storedValue);
+      this.#onStateChange();
     }
   }
 
@@ -18,6 +20,7 @@ export class State {
 
   add(task) {
     this.todos[task.id] = task;
+    this.#onStateChange();
   }
 
   changeStatus(id, newStatus) {
@@ -27,10 +30,13 @@ export class State {
     }
 
     item.status = newStatus;
+    this.todos[id] = item;
+    this.#onStateChange();
   }
 
   delete(id) {
     this.todos.delete(id);
+    this.#onStateChange();
   }
 
   getByStatus(status) {
@@ -42,5 +48,13 @@ export class State {
     });
 
     return result;
+  }
+
+  addChangeListener(callback) {
+    this.stateListeners.push(callback);
+  }
+
+  #onStateChange() {
+    this.stateListeners.forEach((callback) => callback());
   }
 }
