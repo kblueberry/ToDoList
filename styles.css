@@ -1,4 +1,4 @@
-.header {
+.nav_bar {
   background-color: dimgrey;
   display: flex;
   justify-content: space-between;
@@ -6,28 +6,32 @@
   padding: 0 10px;
 }
 
-.header_logo {
+.footer_nav_bar {
+  flex-direction: row-reverse;
+}
+
+.logo {
   max-width: 5%;
   width: 10%;
 }
 
-.header_navigation {
+.navigation {
   flex: 1 1 80%;
   list-style: none;
 }
 
-.header_navigation.horizontal {
+.navigation.horizontal {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 
-.header_navigation.vertical {
+.navigation.vertical {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 .navigation_link a {
